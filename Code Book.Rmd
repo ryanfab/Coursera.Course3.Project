@@ -1,0 +1,53 @@
+The run.analysis.R script brings the different data files for Samsung smart watches together and prepares the data for analysis through the following steps:
+
+1) Download Dataset:
+        * Data downloaded into a folder named "UCI HAR Dataset"
+
+2) Read Data into R:
+        * column_names <- features.txt : 561 rows, 2 columns
+        The column names are desciptions of the variables recorded
+        * activityids <- activity_labels.txt : 6 rows, 2 columns
+        A table containing the activity ID's and their respective activities
+        * subject_test <- test/subject_test.txt : 2947 rows, 1 column
+        contains test data for the participants in the experiment
+        * X_test <- test/X_test.txt : 2947 rows, 561 columns
+        contains data for all variables in column_names
+        * y_test <- test/y_test.txt : 2947 rows, 1 variable
+        contains activity id's for test data
+        * subject_train <- train/subject_train.txt :
+        conatins data for participants allocated to training 
+        * X_train <- /train/X_train.txt : 7352 rows, 1 column
+        conatins data for column variables from the training group
+        * y_train <- train/y_train.txt
+        contains activity ID's for training data
+
+# 3) Merged Data to create one data set:
+        * Combined subject_test, y_test, and X_test to create one data set for test data named "test_df" using the cbind() function : 2947 rows, 563 columns
+        * Combined subject_train, y_train, and X_train to create one data set for taining data named "train_df" using the cbind() function : 7352 rows, 563 columns
+        * Using rbind() with the arguments of test_df and train_df to put all the data into one datatset named "dataset" : 10299 rows, 563 columns
+        
+# 4) Filter columns to only include measurements on the mean or standard deviation for each measurement:
+        * Used the grep function to look for the words "mean" or "std" in the column names and stored the data in "columns"
+        * Used cbind() to create a data set containing the first two columns of "dataset" and all of "columns" and stored the result in "dataset1"
+
+# 5) Replaced activity ID's in the "dataset1" with activity name:
+        * Used "activityids" to replace ID's in column 2 of "dataset1"
+        
+# 6) Cleaned up column names to be more tidy using gsub
+        * made all characters lower case
+        * substituted "acc" for "acceleration"
+        * substituted "t" for "Time"
+        * substituted "f" for "Frequency"
+        * substituted "gyro for "gyroscope"
+        * substituted "bodybody" for "Body"
+        * substituted "body" for "Body"
+        * substituted "mean" for "Mean"
+        * substituted "std" for "Std"
+        * substituted "mag" for "Magnitude"
+        * substituted "gravity" for "Gravity"
+        * Capitalized all names ending in the direction of X, Y, or Z
+        * Capitalized the first character of the first two columns named Subject and ID
+
+# 7) Created a second, independently tidy data set with the average of each variable for each activity and each subject
+        * Using the pipeline operator in the dplyr package, I grouped the data by Subject and Id then used the function summarise_each(mean) lower in the pipleine to create the dataset named "FinalData"
+        * Used write.table() function to create an exportable table in txt format

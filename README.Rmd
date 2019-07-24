@@ -1,0 +1,20 @@
+###Getting and Cleaning Data Course Project
+
+This repository is a Ryan Fabricius submission of the Peer-Graded Assignemnt in the Getting and CLeaning Data Course. It contains the instructions to run_analysis.R. 
+
+##Dataset: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+##Files
+* Code Book.Rmd is a code book that describes all the data, variables, and any transformations that I performed on the Data to make it tidy
+
+* run_analysis.R reads the data into the program and prepares "tidy" data to prepare for data analysis. This is done by the steps below which are explained more in depth in the codebook.
+        * Download Dataset
+        * Read Data into R
+        * Merged Data to create one data set
+        * Filter columns to only include measurements on the mean or standard deviation for each measurement
+        * Replaced activity ID's in the "dataset1" with activity name
+        * Cleaned up column names to be more tidy using gsub
+        * Created a second, independently tidy data set with the average of each variable for each activity and each subject
+
+* FinalData.txt is the final data after going through the process outlined above 
+
