@@ -12,7 +12,7 @@ Files:
         * Read Data into R
         * Merged Data to create one data set
         * Filter columns to only include measurements on the mean or standard deviation for each measurement
-        * Replaced activity ID's in the "dataset1" with activity name
+        * Replaced activity ID's with activity names
         * Cleaned up column names to be more tidy using gsub
         * Created a second, independently tidy data set with the average of each variable for each activity and each subject
 
